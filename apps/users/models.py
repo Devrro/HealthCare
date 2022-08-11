@@ -21,7 +21,7 @@ class UserModel(AbstractBaseUser):
     objects = UserManager()
 
 
-class Profile(models.Model):
+class ProfileModel(models.Model):
     class Meta:
         db_table = 'profile'
 
@@ -33,13 +33,6 @@ class Profile(models.Model):
     is_medic = models.BooleanField(default=False)
     is_patient = models.BooleanField(default=True)
 
-
-class Patient(models.Model):
-    class Meta:
-        db_table = 'patient'
-
-    patient = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='patient')
-    doctor = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='doctor')
 
 
 # class MedicPersonalJobTitlesModel(models.Model):

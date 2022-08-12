@@ -8,19 +8,9 @@ UserModel = get_user_model()
 
 
 class ProfileSerializer(ModelSerializer):
-
     class Meta:
         model = ProfileModel
-        # fields = (
-        #     'id',
-        #     'age',
-        #     'phone_number',
-        #     'first_name',
-        #     'last_name',
-        #     'patient',
-        # )
         exclude = ('user',)
-        # extra_kwargs = {'patient':{"read_only":True}}
 
 
 class UserSerializer(ModelSerializer):
@@ -53,3 +43,5 @@ class UserSerializer(ModelSerializer):
         user = UserModel.objects.create_user(**validated_data)
         ProfileModel.objects.create(**profile, user=user)
         return user
+
+

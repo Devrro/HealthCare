@@ -1,14 +1,13 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import BaseSerializer, ModelSerializer
 
 from apps.doctors.models import DoctorModel
+from apps.users.serializers import UserSerializer
 
 
-class PatientSerializer(ModelSerializer):
+class DoctorSerializer(ModelSerializer):
+    doctors = UserSerializer(many=False, read_only=True)
 
     class Meta:
         model = DoctorModel
-        fields = ('doctor',)
+        fields = ('doctors', 'patients')
 
-    def create(self, validated_data):
-        print(validated_data)
-        return super().create(validated_data)

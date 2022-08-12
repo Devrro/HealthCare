@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
 from rest_framework.permissions import AllowAny
+
+from apps.users.models import ProfileModel
 from core.permissions.user_permission import IsStaffPermission
 
 from apps.users.serializers import UserSerializer
@@ -45,3 +47,5 @@ class DisablePermissionView(UpdateAPIView):
         user.is_staff = False
         user.save()
         return super().patch(request, *args, **kwargs)
+
+

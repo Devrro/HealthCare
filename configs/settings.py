@@ -43,7 +43,8 @@ INSTALLED_APPS = [
 
     # Apps
     'apps.users',
-    'apps.patient',
+    'apps.doctors',
+    'apps.patients',
 ]
 AUTH_USER_MODEL = 'users.UserModel'
 MIDDLEWARE = [

@@ -34,7 +34,6 @@ class ProfileModel(models.Model):
     is_patient = models.BooleanField(default=True)
 
 
-
 # class MedicPersonalJobTitlesModel(models.Model):
 #     class Meta:
 #         db_table = 'medic_work_title'

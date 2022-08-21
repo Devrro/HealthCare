@@ -5,6 +5,7 @@ from rest_framework.permissions import AllowAny
 
 from apps.users.models import ProfileModel
 from core.permissions.user_permission import IsStaffPermission
+from apps.doctors.models import DoctorModel
 
 from apps.users.serializers import UserSerializer
 
@@ -47,5 +48,3 @@ class DisablePermissionView(UpdateAPIView):
         user.is_staff = False
         user.save()
         return super().patch(request, *args, **kwargs)
-
-

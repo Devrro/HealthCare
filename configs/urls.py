@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.urls import include, path
 
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
 urlpatterns = [
     path('users', include('apps.users.urls')),
     path('users', include('apps.doctors.urls')),
+    path('users', include('apps.patients.urls')),
+    path('auth', include('apps.auth.urls')),
     # path('users', include('apps.patients.urls')),
 ]

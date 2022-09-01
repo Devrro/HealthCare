@@ -7,8 +7,9 @@ name = "pypi"
 django = "*"
 djangorestframework = "*"
 mysqlclient = "*"
+pillow = "*"
+django-cors-headers = "*"
 djangorestframework-simplejwt = "*"
-jwt = "*"
 
 [dev-packages]
 isort = "*"

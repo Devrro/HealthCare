@@ -7,10 +7,12 @@ from apps.doctors.views import (
     DoctorAndPatientsListView,
     DoctorListIdView,
     DoctorsListView,
+    DoctorsByIdListView,
 )
 
 urlpatterns = [
     path('/doctors', DoctorsListView.as_view()),
+    path('/doctors/<int:pk>', DoctorsByIdListView.as_view()),
     path('/doctors_with_id', DoctorListIdView.as_view()),
     path('/doctors_and_patients', DoctorAndPatientsListView.as_view()),
     path('/add_to_doctors', AddToDoctorsView.as_view()),

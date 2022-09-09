@@ -30,8 +30,8 @@ class AddToDoctorSerializer(ModelSerializer):
 
     class Meta:
         model = DoctorModel
-        fields = "__all__"
-        extra_kwargs = {'id': {'read_only': True}}
+        fields = ("doctors",)
+        # extra_kwargs = {'id': {'read_only': True}}
 
 
 class DoctorIdSerializer(ModelSerializer):

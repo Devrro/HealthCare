@@ -31,6 +31,17 @@ class DoctorsListView(ListAPIView):
         qs = self.queryset.filter(Q(doctors__isnull=False))
 
         return qs
+
+
+class DoctorsByIdListView(ListAPIView):
+    queryset = UserModel.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (AllowAny,)
+
+    def get_queryset(self):
+        qs = self.queryset.filter(Q(doctors__isnull=False) & Q(id=self.kwargs['pk']))
+
+        return qs
         # print(self.doctor_queryset.query)
         # print(self.queryset.query)
         # user = self.request.user
@@ -59,14 +70,23 @@ class AddToDoctorsView(ListCreateAPIView):
     queryset = DoctorModel.objects.all()
     serializer_class = AddToDoctorSerializer
     # Змінити автентифікація
-    permission_classes = (IsAuthenticated, IsDoctorPermission)
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request, *args, **kwargs):
+        user = get_object_or_404(UserModel.objects.all(), pk=self.request.data.get('user_id'))
+        data = {'doctors': user.id}
+        serializer = self.serializer_class(data=data, partial=True)
+
+        serializer.is_valid()
+        serializer.save()
+        return Response(serializer.initial_data)
 
 
 class DeleteFromDoctorsView(GenericAPIView):
     queryset = DoctorModel.objects.all()
     serializer_class = AddToDoctorSerializer
     # Змінити автентифікація
-    permission_classes = (AllowAny,IsDoctorPermission)
+    permission_classes = (AllowAny, IsDoctorPermission)
 
     def delete(self, request, *args, **kwargs):
         doctor = get_object_or_404(self.queryset, pk=kwargs['pk'])

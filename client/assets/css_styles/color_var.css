@@ -1,0 +1,20 @@
+:root{
+  --wintergreen_dream:#6B9080;
+  --cambridge_blue:#A4C3B2;
+  --light_cyan:#CCE3DE;
+  --azure_11_Web:#EAF4F4;
+  --mint_cream:#F6FFF8;
+}
+
+.bg-light-g{
+  background-color: var(--mint_cream);
+}
+.bg-grey-g-50{
+  background-color: rgba(204, 227, 222, 0.5);
+}
+.bg-dark-g{
+  background-color: var(--wintergreen_dream);
+}
+.bg-light_cyan{
+  background-color: var(--light_cyan);
+}

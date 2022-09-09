@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-
+from django.db.models import Q
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, get_object_or_404
 from rest_framework.permissions import AllowAny
 
@@ -22,6 +22,16 @@ class ListUser(ListAPIView):
     serializer_class = UserSerializer
     queryset = UserModel.objects.all()
     permission_classes = (AllowAny,)
+
+
+class GetUserById(ListAPIView):
+    serializer_class = UserSerializer
+    queryset = UserModel.objects.all()
+    permission_classes = (AllowAny,)
+
+    def get_queryset(self):
+        q = self.queryset.filter(Q(id=self.kwargs.get('pk')))
+        return q
 
 
 class EnablePermissionView(UpdateAPIView):

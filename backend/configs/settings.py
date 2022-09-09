@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
-
 from .extra_configs import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -42,8 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
-
-
+    'django_filters',
+    
     # Apps
     'apps.users',
     'apps.doctors',

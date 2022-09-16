@@ -2,8 +2,6 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q
 
 from rest_framework.generics import (
-    CreateAPIView,
-    DestroyAPIView,
     GenericAPIView,
     ListAPIView,
     ListCreateAPIView,
@@ -15,8 +13,8 @@ from rest_framework.response import Response
 
 from core.permissions.user_permission import IsDoctorPermission
 from apps.doctors.models import DoctorModel
-from apps.doctors.serializers import AddToDoctorSerializer, DoctorIdSerializer, DoctorsSerializer
-from apps.users.serializers import UserSerializer
+from apps.doctors.serializers import AddToDoctorSerializer, DoctorsSerializer
+from apps.users.serializers import UserSerializer, UserIdSerializer
 from apps.patients.models import PatientModel
 
 UserModel = get_user_model()
@@ -96,7 +94,7 @@ class DeleteFromDoctorsView(GenericAPIView):
 
 class DoctorListIdView(ListAPIView):
     queryset = UserModel.objects.all()
-    serializer_class = DoctorIdSerializer
+    serializer_class = UserIdSerializer
     permission_classes = (AllowAny,)
 
     def get_queryset(self):
@@ -108,3 +106,4 @@ class DoctorAndPatientsListView(ListAPIView):
     serializer_class = DoctorsSerializer
     # Змінити автентифікація
     permission_classes = (AllowAny,)
+

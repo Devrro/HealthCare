@@ -1,12 +1,12 @@
 from django.contrib.auth import get_user_model
 from django.db.models import Q
-from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, get_object_or_404
+from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
 from rest_framework.permissions import AllowAny
 
 from core.permissions.user_permission import IsStaffPermission
 from rest_framework.permissions import IsAuthenticated
 
-from apps.users.serializers import UserSerializer, AvatarSerializer
+from apps.users.serializers import UserSerializer, AvatarSerializer, UserIdSerializer
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 UserModel = get_user_model()
@@ -76,3 +76,12 @@ class GetAvatarView(ListAPIView):
     def get(self, request, *args, **kwargs):
         user = get_object_or_404(self.queryset, pk=self.request.user.id)
         return Response({"picture": f"{user.profile.profile_picture}"})
+
+
+class DoctorListIdView(ListAPIView):
+    queryset = UserModel.objects.all()
+    serializer_class = UserIdSerializer
+    permission_classes = (AllowAny,)
+
+    def get_queryset(self):
+        return self.queryset.filter(Q(doctors__isnull=False))

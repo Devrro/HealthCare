@@ -1,4 +1,7 @@
+from typing import Type
+
 from django.contrib.auth import get_user_model
+from rest_framework.fields import SerializerMethodField
 
 from rest_framework.serializers import ModelSerializer
 
@@ -50,4 +53,17 @@ class UserSerializer(ModelSerializer):
         ProfileModel.objects.create(**profile, user=user)
         return user
 
+class UserIdSerializer(ModelSerializer):
+    last_name = SerializerMethodField()
+    first_name = SerializerMethodField()
+
+    class Meta:
+        model = UserModel
+        fields = ('id', 'first_name', 'last_name')
+
+    def get_last_name(self, obj: Type[UserModel]):
+        return obj.profile.last_name
+
+    def get_first_name(self, obj: Type[UserModel]):
+        return obj.profile.first_name
 

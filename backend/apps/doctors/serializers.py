@@ -34,16 +34,3 @@ class AddToDoctorSerializer(ModelSerializer):
         # extra_kwargs = {'id': {'read_only': True}}
 
 
-class DoctorIdSerializer(ModelSerializer):
-    last_name = SerializerMethodField()
-    first_name = SerializerMethodField()
-
-    class Meta:
-        model = UserModel
-        fields = ('id', 'first_name', 'last_name')
-
-    def get_last_name(self, obj: Type[UserModel]):
-        return obj.profile.last_name
-
-    def get_first_name(self, obj: Type[UserModel]):
-        return obj.profile.first_name

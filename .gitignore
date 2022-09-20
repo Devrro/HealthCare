@@ -1,2 +1,3 @@
 /.venv/
 /mysql_db/
+/frontend/node_modules/

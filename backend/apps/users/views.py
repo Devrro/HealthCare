@@ -9,6 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from apps.users.serializers import UserSerializer, AvatarSerializer, UserIdSerializer
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
+
 UserModel = get_user_model()
 
 
@@ -85,3 +86,13 @@ class DoctorListIdView(ListAPIView):
 
     def get_queryset(self):
         return self.queryset.filter(Q(doctors__isnull=False))
+
+
+class UsersListIdView(ListAPIView):
+    queryset = UserModel.objects.all()
+    serializer_class = UserIdSerializer
+    permission_classes = (AllowAny,)
+
+    def get_queryset(self):
+        print(self.request.data['startswith'])
+        return self.queryset.filter(Q(doctors__isnull=True))

@@ -95,7 +95,7 @@ class UsersListIdView(ListAPIView):
     permission_classes = (AllowAny,)
 
     def get_queryset(self):
-        qs = self.querysetp
+        qs = self.queryset
         qs = qs.filter()
         qs = qs.filter(Q(doctors__isnull=True) | Q())
         # print(self.request.data['startswith'])

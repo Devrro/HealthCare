@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
+from rest_framework.mixins import ListModelMixin
 from rest_framework.permissions import AllowAny
 
 from core.permissions.user_permission import IsStaffPermission
@@ -89,10 +90,13 @@ class DoctorListIdView(ListAPIView):
 
 
 class UsersListIdView(ListAPIView):
-    queryset = UserModel.objects.all()
+    queryset = UserModel.objects.all().filter()
     serializer_class = UserIdSerializer
     permission_classes = (AllowAny,)
 
     def get_queryset(self):
-        print(self.request.data['startswith'])
-        return self.queryset.filter(Q(doctors__isnull=True))
+        qs = self.querysetp
+        qs = qs.filter()
+        qs = qs.filter(Q(doctors__isnull=True) | Q())
+        # print(self.request.data['startswith'])
+        return qs

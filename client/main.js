@@ -1179,7 +1179,6 @@ class AuthInterceptor {
             }
             return (0,rxjs__WEBPACK_IMPORTED_MODULE_4__.throwError)(() => {
                 new Error('Token is expired');
-                this.is_Auth_obs.userIsLogged.next(false);
             });
         }));
     }
